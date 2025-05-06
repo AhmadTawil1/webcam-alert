@@ -15,6 +15,7 @@ A Python-based security system that uses your computer's webcam to detect motion
 - Python 3.x
 - OpenCV (cv2)
 - SMTP access for email functionality
+- python-dotenv (for environment variables)
 
 ## Installation
 
@@ -26,15 +27,20 @@ cd webcam-alert
 
 2. Install the required packages:
 ```bash
-pip install opencv-python
+pip install opencv-python python-dotenv
 ```
 
 3. Configure email settings:
-   - Open `emailing.py`
-   - Update the following variables with your email credentials:
-     - `PASSWORD`: Your email app password
-     - `SENDER`: Your email address
-     - `RECEIVER`: Recipient email address
+   - Create a new file named `.env` in the project root directory
+   - Add the following variables to the `.env` file:
+     ```
+     EMAIL_PASSWORD=your_email_app_password
+     EMAIL_SENDER=your_email@gmail.com
+     EMAIL_RECEIVER=recipient_email@gmail.com
+     ```
+   - Replace the values with your actual email credentials
+   - Make sure to use an app password for Gmail (not your regular password)
+   - Never commit the `.env` file to version control
 
 ## Usage
 
@@ -65,8 +71,10 @@ The system uses computer vision techniques to:
 ## Security Note
 
 - The system uses Gmail's SMTP server for sending emails
+- Email credentials are stored in environment variables for security
 - Make sure to use an app password instead of your main email password
-- Keep your email credentials secure and never share them
+- Keep your `.env` file secure and never share it
+- The `.env` file is already in `.gitignore` to prevent accidental commits
 
 ## Contributing
 

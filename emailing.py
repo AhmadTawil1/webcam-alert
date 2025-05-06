@@ -1,13 +1,23 @@
 import imghdr
 import smtplib
-import imghdr
+import os
 from email.message import EmailMessage
+from dotenv import load_dotenv
 
-PASSWORD = "wtcg uryp zkea iccn"
-SENDER = "ahmadtw213@gmail.com"
-RECEIVER = "ahmadtw213@gmail.com"
+# Load environment variables
+load_dotenv()
+
+# Get credentials from environment variables
+PASSWORD = os.getenv('EMAIL_PASSWORD')
+SENDER = os.getenv('EMAIL_SENDER')
+RECEIVER = os.getenv('EMAIL_RECEIVER')
 
 def send_email(image_path):
+    # Check if credentials are configured
+    if not all([PASSWORD, SENDER, RECEIVER]):
+        print("Error: Email credentials not configured. Please set up your .env file.")
+        return
+
     email_message = EmailMessage()
     email_message["Subject"] = "New customer showed up!"
     email_message.set_content("Hey, we just saw a new customer!")
